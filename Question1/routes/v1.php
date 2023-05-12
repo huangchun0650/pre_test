@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 /**
  * TEST
@@ -31,6 +30,13 @@ Route::group(['prefix' => 'ping'], function () {
  * POSTS
  */
 Route::group(['prefix' => 'post'], function () {
-    Route::put('/', 'LoginController@login');
+    Route::post('/', 'PostsController@store');
+});
+
+/**
+ * COMMENTS
+ */
+Route::group(['prefix' => 'comment'], function () {
+    Route::post('/', 'CommentsController@store');
 });
 
