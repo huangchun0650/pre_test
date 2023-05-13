@@ -1,4 +1,7 @@
 <?php
+/**
+ * 共用方法
+ */
 
 if (! function_exists('get_jwt_payload')) {
     function get_jwt_payload($jwt, $key = null, $default = null)
@@ -38,78 +41,11 @@ if (! function_exists('can_be_modified')) {
     }
 }
 
-if (! function_exists('valid_admin_jwt')) {
-    function valid_admin_jwt($jwt, $admin = true)
-    {
-        if (blank($jwt)) {
-            return false;
-        }
-
-        $payload = get_jwt_payload($jwt);
-        $id = data_get($payload, 'adminAccountId');
-        if (blank($id)) {
-            return false;
-        }
-
-        $acc = ($admin)
-            ? new App\Library\GameServer\Admin\Admin()
-            : new App\Library\GameServer\Partner\Partner();
-        $account_detail = $acc->detail($jwt, $id);
-        if (data_get($account_detail, 'data._key') !== $id) {
-            return false;
-        }
-        return true;
-    }
-}
-
-if (! function_exists('encodePlayerIdToPlayerHashId')) {
-    function encodePlayerIdToPlayerHashId($player_id)
-    {
-        // Set the offset basis
-        $hash = 0x811c9dc5;
-        // If we have characters to process
-        if (strlen($player_id) > 0) {
-            // Make a character array from the string
-            $string_array = str_split($player_id);
-            // For each character
-            foreach ($string_array as $chr) {
-                // Xor with the current character
-                $hash ^= ord($chr);
-                // Multiply by prime
-                $hash *= 0x01000193;
-                // Clamp
-                $hash &= 0xffffffff;
-            }
-        }
-        return $hash;
-    }
-}
-
-if (! function_exists('encodePlayerHashIdToModId')) {
-    function encodePlayerHashIdToModId(int $player_id, int $num_of_sharding_db)
-    {
-        return $player_id % $num_of_sharding_db;
-    }
-}
-
-if (! function_exists('encodePlayerIdToModId')) {
-    function encodePlayerIdToModId(int $player_id, int $num_of_sharding_db) {
-        return encodePlayerHashIdToModId(encodePlayerIdToPlayerHashId($player_id), $num_of_sharding_db);
-    }
-}
-
 if (! function_exists('json_response')) {
 
     function json_response(): \App\Http\Responses\Response
     {
         return app('App\\Http\\Responses\\Response');
-    }
-}
-
-if (! function_exists('device')) {
-    function device()
-    {
-        return new \App\Library\Device();
     }
 }
 
@@ -194,19 +130,6 @@ if (! function_exists('format_short_exception')) {
             "Line: {$e->getLine()}";
     }
 }
-
-if (! function_exists('slack_notify')) {
-    /**
-     * slack 通知
-     *
-     * @return \Psr\Log\LoggerInterface
-     */
-    function slack_notify(): \Psr\Log\LoggerInterface
-    {
-        return \Log::channel('slack');
-    }
-}
-
 
 if (! function_exists('parse_bool')) {
     /**

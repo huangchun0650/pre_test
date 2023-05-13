@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe33f98a750b8c5a51b30c78bd3fab21",
+    "content-hash": "b04669432bcb221e11680ae03074cd8a",
     "packages": [
         {
             "name": "brick/math",
@@ -1020,6 +1020,58 @@
                 }
             ],
             "time": "2021-10-07T12:57:01+00:00"
+        },
+        {
+            "name": "huang_chun/transform-api",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/huangchun0650/transform-api.git",
+                "reference": "305792bf72cbec20ed1a4188d648d56d12edf5d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/huangchun0650/transform-api/zipball/305792bf72cbec20ed1a4188d648d56d12edf5d8",
+                "reference": "305792bf72cbec20ed1a4188d648d56d12edf5d8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^7.0|^8.0|^9.0",
+                "illuminate/pagination": "^7.0|^8.0|^9.0",
+                "php": "^8.0",
+                "symfony/http-foundation": "^5.0|^6.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0|^7.0",
+                "phpunit/phpunit": "^9.3",
+                "symfony/var-dumper": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "HuangChun\\TransformApi\\TransformServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "HuangChun\\TransformApi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "For APi Transform",
+            "support": {
+                "issues": "https://github.com/huangchun0650/transform-api/issues",
+                "source": "https://github.com/huangchun0650/transform-api/tree/v1.0.3"
+            },
+            "time": "2023-04-25T08:05:46+00:00"
         },
         {
             "name": "laravel/framework",
